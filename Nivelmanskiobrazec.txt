@@ -1,0 +1,30 @@
+import math
+print(50 *'_')
+print('NIVELMANSKI OBRAZEC')
+print('MATEVŽ LEDINEK')
+print(50 *'_')
+print('KONI Ni 007')
+choice = input('NAPIŠITE ŠTEVILO RAZDELB NA LAT1[1 ali 2] : ')
+choice = int(choice)
+
+if choice == 1:
+    print (50*'_')
+    R1 = int(input('IME PRVEGA REPERJA ='))
+    oz1 = int(input('ODČITEK ZGORAJ='))
+    os1= int(input('ODČITEK SPODAJ='))
+    o1= int(input('SREDINA='))
+    R= (oz1-os1)/1000
+    print('RAZDALJA = {:10.1f} m'.format(R))
+    
+if choice == 2:
+    print (50*'_')
+    R1 = int(input('IME PRVEGA REPERJA ='))
+    oz1 = int(input('ODČITEK ZGORAJ LEVA RAZDELBA='))
+    os1= int(input('ODČITEK SPODAJ LEVA RAZDELBA='))
+    o1= int(input('SREDINA LEVA RAZDELBA='))
+    oz2 = int(input('ODČITEK ZGORAJ LEVA RAZDELBA='))
+    os2= int(input('ODČITEK SPODAJ LEVA RAZDELBA='))
+    o2= int(input('SREDINA LEVA RAZDELBA='))
+    R= (oz1-os1)/1000
+    R1= (oz2-os2)/1000
+    print('RAZDALJA = {:10.1f} m {:10.1f} m'.format(R).format(R1))
