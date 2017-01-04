@@ -4,13 +4,56 @@ print('NIVELMANSKI OBRAZEC')
 print('AVTOR: MATEVŽ LEDINEK')
 print(50 * '_')
 
+
+def izpis(ime, oz_z, os_z, s_z, dol_z, oz_s, os_s, s_s, dol_s, raz, file):
+    """
+    Funkcija, ki izpiše meritve in rezultate v poljubno datoteko.
+    
+    ime: ime stojišča
+    oz_z: odčitek zgoraj zadaj v m
+    os_z: odčitek spodaj zadaj v m
+    s_z: odcitek v sredini zadaj v m
+    dol_z: dolžina do žabe v m
+    oz_s: odčitek zgoraj spredaj v m
+    os_s: odčitek spodaj spredaj v m
+    s_s: odčitek sredina spredaj v m
+    dol_s: dolžina do žabe v m
+    raz:  višinska razlika v m
+    file: pot in ime datoteke, v katero želimo zapisovati (\\pot\\ime_datoteke.txt)
+    """
+    sir_1 = max([len(i) for i in ime])
+    sir_2 = max([len(str(i)) for i in oz_z + os_z])
+    sir_3 = max([len(str(i)) for i in s_z])
+    sir_4 = max([len(str(i)) for i in dol_z])
+    sir_5 = max([len(str(i)) for i in oz_s + os_s])
+    sir_6 = max([len(str(i)) for i in s_s])
+    sir_7 = max([len(str(i)) for i in dol_s])
+    sir_8 = max([len(str(i)) for i in raz])
+    
+    for i in range(len(ime)):
+        print('{0:{width}}'.format(ime[i], width=sir_1), '{0:{width}}'.format(oz_z[i], width=sir_2), '{:{width}}'.format(' ',width=sir_3),'{:{width}}'.format(' ',width=sir_4), '{0:{width}}'.format(oz_s[i], width=sir_5), file=file)
+        print('{:{width}}'.format(' ',width=sir_1), '{:{width}}'.format(' ',width=sir_2), '{0:{width}}'.format(s_z[i], width=sir_3), '{0:{width}.2f}'.format(dol_z[i], width=sir_4), '{:{width}}'.format(' ',width=sir_5), '{0:{width}}'.format(s_s[i], width=sir_6), '{0:{width}.2f}'.format(dol_s[i], width=sir_7), '{0:{width}.3f}'.format(raz[i], width=sir_8), file=file)
+        print('{:{width}}'.format(' ',width=sir_1), '{0:{width}}'.format(os_z[i], width=sir_2), '{:{width}}'.format(' ',width=sir_3),'{:{width}}'.format(' ',width=sir_4), '{0:{width}}'.format(os_s[i], width=sir_5), file=file)
+        print((sir_1 + sir_2 + sir_3 + sir_4 + sir_5 + sir_6 + sir_7 + sir_8 + 7)*'_', file=file)
+
 stevilo_razdelb = input('VNESITE ŠTEVILO RAZDELB NA LATI [1 ALI 2]: ')
 
+
 if int(stevilo_razdelb) == 1:
-        
+    
     print (50 * '_')
+    razdalja_zab = []
     visinske_razlike = []
-    razdalja_zab     = []
+    razdalja_1zzz = []
+    razdalja_2zzz = []
+    R_1zzz = []
+    oz_1zzz = []
+    os_1zzz = []
+    o_1zzz = []
+    oz_2zzz = []
+    o_2zzz =  []
+    os_2zzz = []
+    
     i = 1
     zanka = True
     while zanka is True:
@@ -20,6 +63,7 @@ if int(stevilo_razdelb) == 1:
             while zanka2 is True:
                 print('STOJIŠČE ŠTEVILKA {:g}'.format(i))
                 print('\nMERITEV ZADAJ')
+                print('\nPREDLAGANO IME STOJIŠČA : {:g}'.format(i))
                 R_1 = input('\tIME PRVEGA STOJIŠČA = ') # prvi reper zadaj
                 oz_1 = input('\tODČITEK ZGORAJ = ') # odčitek zgoraj zadaj (kot string: 'm dm cm mm...' brez presledkov)
                 o_1 = input('\tODČITEK V SREDINI = ') # odčitek v sredini zadaj
@@ -74,6 +118,17 @@ if int(stevilo_razdelb) == 1:
                         visinske_razlike.append(vr)
                         nv = razdalja_1 + razdalja_2
                         razdalja_zab.append(nv)
+                        razdalja_1zzz.append(razdalja_1)
+                        razdalja_2zzz.append(razdalja_2)
+                        R_1zzz.append(R_1)
+                        oz_1zzz.append(oz_1)
+                        os_1zzz.append(os_1)
+                        o_1zzz.append(o_1)
+                        oz_2zzz.append(oz_2)
+                        o_2zzz.append(o_2)
+                        os_2zzz.append(os_2)
+                        
+                        
 
                         print('\nVIŠINSKA RAZLIKA {0:.0f} = {1:.4f} m'.format(i, vr))
                         print(50 * '_')
@@ -89,6 +144,7 @@ if int(stevilo_razdelb) == 1:
                             dolzina_vlaka = sum(razdalja_zab)
                             print('\nDOLZINA NIVELMANSKEGA VLAKA = {:.1f} m'.format(dolzina_vlaka))
                             print(50 * '_')
+                            
                             zanka = False   
                             
 
@@ -108,6 +164,8 @@ if int(stevilo_razdelb) == 2:
             
                 print('STOJIŠČE ŠTEVILKA {:g}'.format(i))
                 print('\nMERITEV ZADAJ')
+                print('\nPREDLAGANO IME STOJIŠČA : {:g}'.format(i))
+                
                 R_1 = input('\tIME PRVEGA STOJIŠČA = ') # prvi reper zadaj levo
                 oz_1 = input('\tODČITEK ZGORAJ LEVO = ') # odčitek zgoraj zadaj (kot string: 'm dm cm mm...' brez presledkov)
                 o_1 = input('\tODČITEK V SREDINI LEVO= ') # odčitek v sredini zadaj levo
@@ -213,3 +271,8 @@ if int(stevilo_razdelb) == 2:
                             print('\nDOLZINA NIVELMANSKEGA VLAKA = {:.1f} m'.format(dolzina_vlaka))
                             print(50 * '_')
                             zanka = False
+
+with open('Rezultati.txt', mode='w') as datoteka:
+    izpis(R_1zzz, oz_1zzz, os_1zzz, o_1zzz, razdalja_1zzz, oz_2zzz, os_2zzz, o_2zzz, razdalja_2zzz, visinske_razlike, datoteka)
+    print('Dolžina vlaka: {:.2f}'.format(dolzina_vlaka), file = datoteka )
+    print('Skupna višinska sprememba: {:.3f}'.format(sprememba_visine), file = datoteka )
