@@ -5,7 +5,7 @@ print('AVTOR: MATEVŽ LEDINEK')
 print(50 * '_')
 
 
-def izpis(ime, oz_z, os_z, s_z, dol_z, oz_s, os_s, s_s, dol_s, raz, file):
+def izpis(ime, oz_z, os_z, s_z, dol_z, oz_s, os_s, s_s, dol_s, raz, file, razdelba=1):
     """
     Funkcija, ki izpiše meritve in rezultate v poljubno datoteko.
     
@@ -29,12 +29,21 @@ def izpis(ime, oz_z, os_z, s_z, dol_z, oz_s, os_s, s_s, dol_s, raz, file):
     sir_6 = max([len(str(i)) for i in s_s])
     sir_7 = max([len(str(i)) for i in dol_s])
     sir_8 = max([len(str(i)) for i in raz])
+    levodesno = ['L' if i % 2 != 0 else 'D' for i in range(1, len(R_1zzz) + 1)]
     
-    for i in range(len(ime)):
-        print('{0:{width}}'.format(ime[i], width=sir_1), '{0:{width}}'.format(oz_z[i], width=sir_2), '{:{width}}'.format(' ',width=sir_3),'{:{width}}'.format(' ',width=sir_4), '{0:{width}}'.format(oz_s[i], width=sir_5), file=file)
-        print('{:{width}}'.format(' ',width=sir_1), '{:{width}}'.format(' ',width=sir_2), '{0:{width}}'.format(s_z[i], width=sir_3), '{0:{width}.2f}'.format(dol_z[i], width=sir_4), '{:{width}}'.format(' ',width=sir_5), '{0:{width}}'.format(s_s[i], width=sir_6), '{0:{width}.2f}'.format(dol_s[i], width=sir_7), '{0:{width}.3f}'.format(raz[i], width=sir_8), file=file)
-        print('{:{width}}'.format(' ',width=sir_1), '{0:{width}}'.format(os_z[i], width=sir_2), '{:{width}}'.format(' ',width=sir_3),'{:{width}}'.format(' ',width=sir_4), '{0:{width}}'.format(os_s[i], width=sir_5), file=file)
-        print((sir_1 + sir_2 + sir_3 + sir_4 + sir_5 + sir_6 + sir_7 + sir_8 + 7)*'_', file=file)
+    if razdelba == 1:
+        for i in range(len(ime)):
+            print('{0:{width}}'.format(ime[i], width=sir_1), '{0:{width}}'.format(oz_z[i], width=sir_2), '{:{width}}'.format(' ',width=sir_3),'{:{width}}'.format(' ',width=sir_4), '{0:{width}}'.format(oz_s[i], width=sir_5), file=file)
+            print('{:{width}}'.format(' ', width=sir_1), '{:{width}}'.format(' ', width=sir_2), '{0:{width}}'.format(s_z[i], width=sir_3), '{0:{width}.2f}'.format(dol_z[i], width=sir_4), '{:{width}}'.format(' ',width=sir_5), '{0:{width}}'.format(s_s[i], width=sir_6), '{0:{width}.2f}'.format(dol_s[i], width=sir_7), '{0:{width}.3f}'.format(raz[i], width=sir_8), file=file)
+            print('{:{width}}'.format(' ', width=sir_1), '{0:{width}}'.format(os_z[i], width=sir_2), '{:{width}}'.format(' ',width=sir_3),'{:{width}}'.format(' ',width=sir_4), '{0:{width}}'.format(os_s[i], width=sir_5), file=file)
+            print((sir_1 + sir_2 + sir_3 + sir_4 + sir_5 + sir_6 + sir_7 + sir_8 + 7)*'_', file=file)
+    elif razdelba == 2:
+        for i in range(len(ime)):
+            print('{0:{width}}'.format(ime[i], width=sir_1), '{0:{width}}'.format(oz_z[i], width=sir_2), '{:{width}}'.format(' ',width=sir_3),'{:{width}}'.format(' ',width=sir_4), '{0:{width}}'.format(oz_s[i], width=sir_5), file=file)
+            print('{0:{width}}'.format(levodesno[i], width=sir_1), '{:{width}}'.format(' ', width=sir_2), '{0:{width}}'.format(s_z[i], width=sir_3), '{0:{width}.2f}'.format(dol_z[i], width=sir_4), '{:{width}}'.format(' ',width=sir_5), '{0:{width}}'.format(s_s[i], width=sir_6), '{0:{width}.2f}'.format(dol_s[i], width=sir_7), '{0:{width}.3f}'.format(raz[i], width=sir_8), file=file)
+            print('{:{width}}'.format(' ', width=sir_1), '{0:{width}}'.format(os_z[i], width=sir_2), '{:{width}}'.format(' ',width=sir_3),'{:{width}}'.format(' ',width=sir_4), '{0:{width}}'.format(os_s[i], width=sir_5), file=file)
+            print((sir_1 + sir_2 + sir_3 + sir_4 + sir_5 + sir_6 + sir_7 + sir_8 + 7)*'_', file=file)
+        
 
 stevilo_razdelb = input('VNESITE ŠTEVILO RAZDELB NA LATI [1 ALI 2]: ')
 
@@ -43,7 +52,7 @@ if int(stevilo_razdelb) == 1:
     
     print (50 * '_')
     razdalja_zab = []
-    visinske_razlike = []
+    visinske_razlike1 = []
     razdalja_1zzz = []
     razdalja_2zzz = []
     R_1zzz = []
@@ -66,7 +75,7 @@ if int(stevilo_razdelb) == 1:
                 print('\nPREDLAGANO IME STOJIŠČA : {:g}'.format(i))
                 R_1 = input('\tIME PRVEGA STOJIŠČA = ') # prvi reper zadaj
                 oz_1 = input('\tODČITEK ZGORAJ = ') # odčitek zgoraj zadaj (kot string: 'm dm cm mm...' brez presledkov)
-                o_1 = input('\tODČITEK V SREDINI = ') # odčitek v sredini zadaj
+                o_1  = input('\tODČITEK V SREDINI = ') # odčitek v sredini zadaj
                 os_1 = input('\tODČITEK SPODAJ = ') # odčitek spodaj zadaj 
 
                 povprecje1 = (int(oz_1) + int(os_1)) / 2
@@ -91,7 +100,7 @@ if int(stevilo_razdelb) == 1:
 
                     print('\nMERITEV SPREDAJ')
                     oz_2 = input('\tODČITEK ZGORAJ = ') # odčitek zgoraj spredaj
-                    o_2 = input('\tODČITEK V SREDINI = ') # odčitek v sredini spredaj
+                    o_2  = input('\tODČITEK V SREDINI = ') # odčitek v sredini spredaj
                     os_2 = input('\tODČITEK SPODAJ = ') # odčitek spodaj spredaj 
 
                     povprecje2 = (int(oz_2) + int(os_2)) / 2
@@ -115,7 +124,7 @@ if int(stevilo_razdelb) == 1:
                         print('\tRAZDALJA = {:.0f} m'.format(razdalja_2))
 
                         vr = o_1 - o_2
-                        visinske_razlike.append(vr)
+                        visinske_razlike1.append(vr)
                         nv = razdalja_1 + razdalja_2
                         razdalja_zab.append(nv)
                         razdalja_1zzz.append(razdalja_1)
@@ -139,20 +148,39 @@ if int(stevilo_razdelb) == 1:
                         if izbira == 1:
                                 i += 1
                         elif izbira == 2:
-                            sprememba_visine = sum(visinske_razlike)
-                            print('\nSKUPNA SPREMEMBA VIŠINE = {:.4f} m'.format(sprememba_visine))
+                            sprememba_visine1 = sum(visinske_razlike1)
+                            print('\nSKUPNA SPREMEMBA VIŠINE = {:.4f} m'.format(sprememba_visine1))
                             dolzina_vlaka = sum(razdalja_zab)
                             print('\nDOLZINA NIVELMANSKEGA VLAKA = {:.1f} m'.format(dolzina_vlaka))
                             print(50 * '_')
                             
-                            zanka = False   
+                            zanka = False
+                        
+                        with open('Rezultati.txt', mode='w') as datoteka:
+                            izpis(R_1zzz, oz_1zzz, os_1zzz, o_1zzz, razdalja_1zzz, oz_2zzz, os_2zzz, o_2zzz, razdalja_2zzz, visinske_razlike1, datoteka)
+                            print('Dolžina vlaka: {:.2f}'.format(dolzina_vlaka), file = datoteka )
+                            print('Skupna višinska sprememba: {:.3f}'.format(sprememba_visine1), file = datoteka )
+    
+   
                             
 
 if int(stevilo_razdelb) == 2:       
     print (50 * '_')
     visinske_razlike1 = []
     visinske_razlike2 = []
-    razdalja_zab1     = [] 
+    razdalja_zab1     = []
+    
+    razdalja_1zzz = []
+    razdalja_2zzz = []
+    R_1zzz = []
+    oz_1zzz = []
+    os_1zzz = []
+    o_1zzz = []
+    oz_2zzz = []
+    o_2zzz =  []
+    os_2zzz = []
+       
+    
     i = 1
     zanka = True
     while zanka is True:
@@ -172,7 +200,7 @@ if int(stevilo_razdelb) == 2:
                 os_1 = input('\tODČITEK SPODAJ LEVO = ') # odčitek spodaj zadaj levo
 
                 oz_2 = input('\tODČITEK ZGORAJ DESNO= ') # odčitek zgoraj zadaj (kot string: 'm dm cm mm...' brez presledkov)
-                o_2= input('\tODČITEK V SREDINI DESNO= ') # odčitek v sredini zadaj desno
+                o_2 =  input('\tODČITEK V SREDINI DESNO= ') # odčitek v sredini zadaj desno
                 os_2 = input('\tODČITEK SPODAJ DESNO = ') # odčitek spodaj zadaj desno
 
                 povprecje1 = (int(oz_1) + int(os_1)) / 2
@@ -208,12 +236,12 @@ if int(stevilo_razdelb) == 2:
 
                     print('\nMERITEV SPREDAJ')
                     oz_3 = input('\tODČITEK ZGORAJ LEVO = ') # odčitek zgoraj zadaj (kot string: 'm dm cm mm...' brez presledkov)
-                    o_3  = input('\tODČITEK V SREDINI LEVO= ') # odčitek v sredini zadaj levo
+                    o_3 = input('\tODČITEK V SREDINI LEVO= ') # odčitek v sredini zadaj levo
                     os_3 = input('\tODČITEK SPODAJ LEVO = ') # odčitek spodaj zadaj levo
 
-                    oz_4 = input('\tODČITEK ZGORAJ DESNO= ') # odčitek zgoraj zadaj (kot string: 'm dm cm mm...' brez presledkov)
-                    o_4  = input('\tODČITEK V SREDINI DESNO= ') # odčitek v sredini zadaj desno
-                    os_4 = input('\tODČITEK SPODAJ DESNO = ') # odčitek spodaj zadaj desno
+                    oz_4 =  input('\tODČITEK ZGORAJ DESNO= ') # odčitek zgoraj zadaj (kot string: 'm dm cm mm...' brez presledkov)
+                    o_4 =  input('\tODČITEK V SREDINI DESNO= ') # odčitek v sredini zadaj desno
+                    os_4 =  input('\tODČITEK SPODAJ DESNO = ') # odčitek spodaj zadaj desno
 
                     povprecje3 = (int(oz_3) + int(os_3)) / 2
                     razlika3 = abs(int(povprecje3) - int(o_3))
@@ -249,9 +277,31 @@ if int(stevilo_razdelb) == 2:
                         vr1 = o_1 - o_3
                         visinske_razlike1.append(vr1)
                         vr2 = o_2 - o_4
+                        visinske_razlike1.append(vr2)
                         visinske_razlike2.append(vr2)
                         nv1 = razdalja_1 + razdalja_2
                         razdalja_zab1.append(nv1)
+                        
+                        razdalja_1zzz.append(razdalja_1)
+                        razdalja_1zzz.append(razdalja_1) ### spremeni!!
+                        razdalja_2zzz.append(razdalja_2)
+                        razdalja_2zzz.append(razdalja_2) ### spremeni!!
+                        R_1zzz.append(R_1)
+                        R_1zzz.append(R_1)
+                        oz_1zzz.append(oz_1)
+                        os_1zzz.append(os_1)
+                        o_1zzz.append(o_1)
+                        oz_1zzz.append(oz_2)
+                        o_1zzz.append(o_2)
+                        os_1zzz.append(os_2)
+                        
+                        oz_2zzz.append(oz_3)
+                        o_2zzz.append(o_3  )
+                        os_2zzz.append(os_3 )
+                        
+                        oz_2zzz.append(oz_4)
+                        o_2zzz.append(o_4 )
+                        os_2zzz.append(os_4)
 
                         print('\nVIŠINSKA RAZLIKA RAZDELBA LEVO {0:.0f} = {1:.4f} m'.format(i, vr1))
                         print('\nVIŠINSKA RAZLIKA RAZDELBA DESNO{0:.0f} = {1:.4f} m'.format(i, vr2))
@@ -266,13 +316,17 @@ if int(stevilo_razdelb) == 2:
                             sprememba_visine1 = sum(visinske_razlike1)
                             print('\nSKUPNA SPREMEMBA VIŠINE RAZDELBA LEVO = {:.4f} m'.format(sprememba_visine1))
                             sprememba_visine2 = sum(visinske_razlike2)
-                            print('\nSKUPNA SPREMEMBA VIŠINE RAZDELBA LEVO = {:.4f} m'.format(sprememba_visine1))
+                            print('\nSKUPNA SPREMEMBA VIŠINE RAZDELBA DESNO = {:.4f} m'.format(sprememba_visine2))
                             dolzina_vlaka = sum(razdalja_zab1)
                             print('\nDOLZINA NIVELMANSKEGA VLAKA = {:.1f} m'.format(dolzina_vlaka))
                             print(50 * '_')
+                            
                             zanka = False
 
-with open('Rezultati.txt', mode='w') as datoteka:
-    izpis(R_1zzz, oz_1zzz, os_1zzz, o_1zzz, razdalja_1zzz, oz_2zzz, os_2zzz, o_2zzz, razdalja_2zzz, visinske_razlike, datoteka)
-    print('Dolžina vlaka: {:.2f}'.format(dolzina_vlaka), file = datoteka )
-    print('Skupna višinska sprememba: {:.3f}'.format(sprememba_visine), file = datoteka )
+                        with open('Rezultati.txt', mode='w') as datoteka:
+                            izpis(R_1zzz, oz_1zzz, os_1zzz, o_1zzz, razdalja_1zzz, oz_2zzz, os_2zzz, o_2zzz, razdalja_2zzz, visinske_razlike1, datoteka, 2)
+                            print('Dolžina vlaka: {:.2f}'.format(dolzina_vlaka), file = datoteka )
+                            print('Skupna višinska sprememba: {:.3f}'.format(sprememba_visine1 / 2), file = datoteka )
+
+                            print('Skupna višinska sprememba druga razdelba: {:.3f}'.format(sprememba_visine2), file = datoteka )
+    
